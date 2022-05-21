@@ -1,65 +1,92 @@
 class Doors:
+    exit = 'выход'
+    unlocked = 'запереть'
+    locked = 'отпереть'
+    opened = 'открыть'
+    closed = 'закрыть'
+
     def __init__(self,sostoyanie='запереть'):
         self.sostoyanie = sostoyanie
-        self.exit = 'выход'
-        self.unlocked = 'запереть'
-        self.locked = 'отпереть'
-        self.opened = 'открыть'
-        self.closed= 'закрыть'
-        print('Сейчас, дверь заперта на замок')
 
-    def _unlock(self):
-        if self.sostoyanie == self.unlocked:
-            self.sostoyanie = input().lower()
+    def _unlock(self,_input):
+        self._input = _input
+        if self._input != self.sostoyanie:
             try:
-                if self.sostoyanie == self.exit:
+                if self._input == self.exit:
                     pass
-                elif self.sostoyanie == self.unlocked:
-                    print('Дверь и так заперта')
-                elif self.sostoyanie == self.locked:
+                elif self._input == self.locked:
+                    self.sostoyanie = self.locked
                     return print('Замок снят с двери')
-                elif self.sostoyanie.isdigit():
-                    raise TypeError('Вы ввели цифры, их вводить нельзя!')
+                elif self._input.isdigit():
+                    print('Цифры вводить нельзя')
+                elif self._input == self.locked:
+                    return print('Замок с двери снят')
                 else:
-                    raise Exception('Вы ввели не то что надо, дверь все ещё заперта!')
-            except TypeError as te:
-                print(str(te))
-            except Exception as ex:
-                print(str(ex))
+                    print('Вы что-то ввели не так')
+            except AttributeError :
+                print('Цифры вводить нельзя!')
+        elif self._input == self.unlocked:
+            print('Дверь и так на замке')
 
-    def _lock(self):
-        if self.sostoyanie == self.locked:
-            self.sostoyanie = input().lower()
+    def _lock(self,_input):
+        self._input = _input
+        if self._input != self.sostoyanie:
             try:
-                if self.sostoyanie == self.unlocked:
-                    return self.sostoyanie == self.unlocked
-                elif self.sostoyanie == self.opened:
-                    return print('Дверь открыта')
-                elif self.sostoyanie == self.exit:
+                if self._input == self.exit:
                     pass
-                elif self.sostoyanie.isdigit():
-                    raise TypeError('Вы ввели цифры, их вводить нельзя!')
+                elif self._input == self.unlocked:
+                    self.sostoyanie = self.unlocked
+                    return print('На дверь вешается замок')
+                elif self._input == self.opened:
+                    self.sostoyanie = self.opened
+                    return print('Дверь открывается')
+                elif self._input.isdigit():
+                    print('Цифры вводить нельзя')
                 else:
-                    raise Exception('Вы ввели не то что надо, дверь все ещё закрыта!')
-            except TypeError as te:
-                print(str(te))
-            except Exception as ex:
-                print(str(ex))
+                    print('Вы что-то ввели не так')
+            except AttributeError:
+                print('Цифры вводить нельзя!')
+        elif self._input == self.locked:
+            print('Дверь и так без замка')
 
-    def _open(self):
-        if self.sostoyanie == self.opened:
-            self.sostoyanie = input().lower()
+    def _open(self,_input):
+        self._input = _input
+        if self._input != self.sostoyanie:
             try:
-                if self.sostoyanie == self.exit:
+                if self._input == self.exit:
                     pass
-                elif self.sostoyanie.isdigit():
-                    raise TypeError('Вы ввели цифры, их вводить нельзя!')
+                elif self._input == self.closed:
+                    self.sostoyanie = self.closed
+                    return print('Дверь закрывается')
+                elif self._input.isdigit():
+                    print('Цифры вводить нельзя')
                 else:
-                    raise Exception('Вы ввели не то что надо')
-            except TypeError as te:
-                print(str(te))
-            except Exception as ex:
-                print(str(ex))
+                    print('Вы что-то ввели не так')
+            except AttributeError:
+                print('Цифры вводить нельзя!')
+        elif self._input == self.opened:
+            print('Дверь и так открыта')
+
+    def _close(self,_input):
+        self._input = _input
+        if self._input != self.sostoyanie:
+            try:
+                if self._input == self.exit:
+                    pass
+                elif self._input == self.unlocked:
+                    self.sostoyanie = self.unlocked
+                    return print('Дверь запирается на замок')
+                elif self._input == self.opened:
+                    self.sostoyanie = self.opened
+                    print('Дверь открывается')
+                elif self._input.isdigit():
+                    print('Цифры вводить нельзя')
+                else:
+                    print('Вы что-то ввели не так')
+            except AttributeError:
+                print('Цифры вводить нельзя!')
+        elif self._input == self.closed:
+            print('Дверь и так закрыта')
+
 
 doors = Doors()
-doors._unlock()
