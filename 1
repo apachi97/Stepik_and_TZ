@@ -5,10 +5,10 @@ class Doors:
     opened = 'открыть'
     closed = 'закрыть'
 
-    def __init__(self,sostoyanie='запереть'):
+    def __init__(self, sostoyanie='запереть'):
         self.sostoyanie = sostoyanie
 
-    def _unlock(self,_input):
+    def _unlock(self, _input):
         self._input = _input
         if self._input != self.sostoyanie:
             try:
@@ -23,12 +23,12 @@ class Doors:
                     return print('Замок с двери снят')
                 else:
                     print('Вы что-то ввели не так')
-            except AttributeError :
+            except AttributeError:
                 print('Цифры вводить нельзя!')
         elif self._input == self.unlocked:
             print('Дверь и так на замке')
 
-    def _lock(self,_input):
+    def _lock(self, _input):
         self._input = _input
         if self._input != self.sostoyanie:
             try:
@@ -49,7 +49,7 @@ class Doors:
         elif self._input == self.locked:
             print('Дверь и так без замка')
 
-    def _open(self,_input):
+    def _open(self, _input):
         self._input = _input
         if self._input != self.sostoyanie:
             try:
@@ -67,7 +67,7 @@ class Doors:
         elif self._input == self.opened:
             print('Дверь и так открыта')
 
-    def _close(self,_input):
+    def _close(self, _input):
         self._input = _input
         if self._input != self.sostoyanie:
             try:
