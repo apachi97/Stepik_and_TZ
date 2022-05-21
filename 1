@@ -14,15 +14,13 @@ class Doors:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.locked:
+                elif self._input == self.locked and self.sostoyanie == self.unlocked :
                     self.sostoyanie = self.locked
                     return print('Замок снят с двери')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
-                elif self._input == self.locked:
-                    return print('Замок с двери снят')
                 else:
-                    print('Вы что-то ввели не так')
+                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
             except AttributeError:
                 print('Цифры вводить нельзя!')
         elif self._input == self.unlocked:
@@ -30,20 +28,20 @@ class Doors:
 
     def _lock(self, _input):
         self._input = _input
-        if self._input != self.sostoyanie:
+        if self._input != self.sostoyanie :
             try:
                 if self._input == self.exit:
                     pass
                 elif self._input == self.unlocked:
                     self.sostoyanie = self.unlocked
                     return print('На дверь вешается замок')
-                elif self._input == self.opened:
+                elif self._input == self.opened and self.sostoyanie == self.locked:
                     self.sostoyanie = self.opened
                     return print('Дверь открывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
                 else:
-                    print('Вы что-то ввели не так')
+                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
             except AttributeError:
                 print('Цифры вводить нельзя!')
         elif self._input == self.locked:
@@ -55,13 +53,13 @@ class Doors:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.closed:
+                elif self._input == self.closed and self.sostoyanie == self.opened:
                     self.sostoyanie = self.closed
                     return print('Дверь закрывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
                 else:
-                    print('Вы что-то ввели не так')
+                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
             except AttributeError:
                 print('Цифры вводить нельзя!')
         elif self._input == self.opened:
@@ -73,20 +71,19 @@ class Doors:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.unlocked:
+                elif self._input == self.unlocked and self.sostoyanie == self.closed:
                     self.sostoyanie = self.unlocked
                     return print('Дверь запирается на замок')
-                elif self._input == self.opened:
+                elif self._input == self.opened and self.sostoyanie == self.closed:
                     self.sostoyanie = self.opened
                     print('Дверь открывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
                 else:
-                    print('Вы что-то ввели не так')
+                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
             except AttributeError:
                 print('Цифры вводить нельзя!')
         elif self._input == self.closed:
             print('Дверь и так закрыта')
-
 
 doors = Doors()
