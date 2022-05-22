@@ -5,17 +5,17 @@ class Doors:
     opened = 'открыть'
     closed = 'закрыть'
 
-    def __init__(self, sostoyanie='запереть'):
-        self.sostoyanie = sostoyanie
+    def __init__(self, state='запереть'):
+        self.state = state
 
     def _unlock(self, _input):
         self._input = _input
-        if self._input != self.sostoyanie:
+        if self._input != self.state:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.locked and self.sostoyanie == self.unlocked :
-                    self.sostoyanie = self.locked
+                elif self._input == self.locked and self.state == self.unlocked :
+                    self.state = self.locked
                     return print('Замок снят с двери')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
@@ -28,15 +28,15 @@ class Doors:
 
     def _lock(self, _input):
         self._input = _input
-        if self._input != self.sostoyanie :
+        if self._input != self.state :
             try:
                 if self._input == self.exit:
                     pass
                 elif self._input == self.unlocked:
-                    self.sostoyanie = self.unlocked
+                    self.state = self.unlocked
                     return print('На дверь вешается замок')
-                elif self._input == self.opened and self.sostoyanie == self.locked:
-                    self.sostoyanie = self.opened
+                elif self._input == self.opened and self.state == self.locked:
+                    self.state = self.opened
                     return print('Дверь открывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
@@ -49,12 +49,12 @@ class Doors:
 
     def _open(self, _input):
         self._input = _input
-        if self._input != self.sostoyanie:
+        if self._input != self.state:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.closed and self.sostoyanie == self.opened:
-                    self.sostoyanie = self.closed
+                elif self._input == self.closed and self.state == self.opened:
+                    self.state = self.closed
                     return print('Дверь закрывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
@@ -67,15 +67,15 @@ class Doors:
 
     def _close(self, _input):
         self._input = _input
-        if self._input != self.sostoyanie:
+        if self._input != self.state:
             try:
                 if self._input == self.exit:
                     pass
-                elif self._input == self.unlocked and self.sostoyanie == self.closed:
-                    self.sostoyanie = self.unlocked
+                elif self._input == self.unlocked and self.state == self.closed:
+                    self.state = self.unlocked
                     return print('Дверь запирается на замок')
-                elif self._input == self.opened and self.sostoyanie == self.closed:
-                    self.sostoyanie = self.opened
+                elif self._input == self.opened and self.state == self.closed:
+                    self.state = self.opened
                     print('Дверь открывается')
                 elif self._input.isdigit():
                     print('Цифры вводить нельзя')
