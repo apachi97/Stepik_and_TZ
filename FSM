@@ -1,89 +1,89 @@
-class Doors:
-    exit = 'выход'
-    unlocked = 'запереть'
-    locked = 'отпереть'
-    opened = 'открыть'
-    closed = 'закрыть'
+class Door:
+    def __init__(self, ambar=True, zamok=True):
+        self.ambar = ambar
+        self.zamok = zamok
 
-    def __init__(self, state='запереть'):
-        self.state = state
+    def unlock(self):
+        if self.ambar and self.zamok:
+            self.ambar = False
+            print('Амбарный замок снят')
+        elif not self.ambar and self.zamok:
+            print('Амбарный замок уже снят, откройте дверь')
+        else:
+            print('Вы тестировщик?)')
 
-    def _unlock(self, _input):
-        self._input = _input
-        if self._input != self.state:
-            try:
-                if self._input == self.exit:
-                    pass
-                elif self._input == self.locked and self.state == self.unlocked :
-                    self.state = self.locked
-                    return print('Замок снят с двери')
-                elif self._input.isdigit():
-                    print('Цифры вводить нельзя')
-                else:
-                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
-            except AttributeError:
-                print('Цифры вводить нельзя!')
-        elif self._input == self.unlocked:
-            print('Дверь и так на замке')
+    def open(self):
+        try:
+            if not self.ambar and self.zamok:
+                self.zamok = False
+                print('Вы открыли дверь!')
+            elif not self.ambar and not self.zamok:
+                print('Дверь уже открыта')
+            elif self.ambar:
+                print('Сначала снимите амбарный замок')
+            else:
+                raise Exception('Я вижу вы тестировщик)')
+        except Exception as e:
+            print(e)
 
-    def _lock(self, _input):
-        self._input = _input
-        if self._input != self.state :
-            try:
-                if self._input == self.exit:
-                    pass
-                elif self._input == self.unlocked:
-                    self.state = self.unlocked
-                    return print('На дверь вешается замок')
-                elif self._input == self.opened and self.state == self.locked:
-                    self.state = self.opened
-                    return print('Дверь открывается')
-                elif self._input.isdigit():
-                    print('Цифры вводить нельзя')
-                else:
-                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
-            except AttributeError:
-                print('Цифры вводить нельзя!')
-        elif self._input == self.locked:
-            print('Дверь и так без замка')
+    def close(self):
+        try:
+            if not self.ambar and not self.zamok:
+                self.zamok = True
+                print('Дверь закрывается')
+            elif self.ambar:
+                print('Сначала снимите амбарный замок')
+            else:
+                raise Exception('Я вижу вы тестировщик)')
+        except Exception as e:
+            print(e)
 
-    def _open(self, _input):
-        self._input = _input
-        if self._input != self.state:
-            try:
-                if self._input == self.exit:
-                    pass
-                elif self._input == self.closed and self.state == self.opened:
-                    self.state = self.closed
-                    return print('Дверь закрывается')
-                elif self._input.isdigit():
-                    print('Цифры вводить нельзя')
-                else:
-                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
-            except AttributeError:
-                print('Цифры вводить нельзя!')
-        elif self._input == self.opened:
-            print('Дверь и так открыта')
+    def lock(self):
+        try:
+            if not self.ambar and self.zamok:
+                self.ambar = True
+                print('Вы повесили амбарный замок')
+            elif self.ambar and self.zamok:
+                print('Замок и так висит')
+            elif not self.zamok:
+                print('Сначала закройте на ключ')
+            elif self.ambar:
+                print('Сначала снимите амбарный замок')
+            else:
+                raise Exception('Я вижу вы тестировщик)')
+        except Exception as e:
+            print(e)
 
-    def _close(self, _input):
-        self._input = _input
-        if self._input != self.state:
-            try:
-                if self._input == self.exit:
-                    pass
-                elif self._input == self.unlocked and self.state == self.closed:
-                    self.state = self.unlocked
-                    return print('Дверь запирается на замок')
-                elif self._input == self.opened and self.state == self.closed:
-                    self.state = self.opened
-                    print('Дверь открывается')
-                elif self._input.isdigit():
-                    print('Цифры вводить нельзя')
-                else:
-                    print('Вы либо что-то ввели не так, либо выбрали не то состояние')
-            except AttributeError:
-                print('Цифры вводить нельзя!')
-        elif self._input == self.closed:
-            print('Дверь и так закрыта')
 
-doors = Doors()
+exit = 'выход'
+unlocked = 'отпереть'
+opened = 'открыть'
+locked = 'запереть'
+closed = 'закрыть'
+
+door = Door()
+while True:
+    try:
+        _input = input().lower()
+        if _input == unlocked:
+            door.unlock()
+            continue
+        elif _input == opened:
+            door.open()
+            continue
+        elif _input == locked:
+            door.lock()
+            continue
+        elif _input == closed:
+            door.close()
+            continue
+        elif _input.isdigit():
+            print('Цифры вводить нельзя')
+            continue
+        elif _input == exit:
+            break
+        else:
+            raise Exception('Я вижу вы тестировщик)')
+    except Exception as e:
+        print(e)
+        continue
