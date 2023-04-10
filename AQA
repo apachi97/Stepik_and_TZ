@@ -1,0 +1,44 @@
+Ссылка на сайт который нужно открыть "http://suninjuly.github.io/explicit_wait2.html"
+
+
+
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions
+import math
+import time
+
+browser = None
+
+
+def calc(x):
+    return str(math.log(abs(12 * math.sin(int(x)))))
+
+
+try:
+    # ---------------------------открыть страницу-------------------------------
+    browser = webdriver.Chrome()
+    link = 'http://suninjuly.github.io/explicit_wait2.html'
+    browser.get(link)
+    browser.implicitly_wait(10)
+    # -----------------подождать появления 100 и затем продолжить---------------
+    clik_book = browser.find_element(By.ID, 'book')
+    wait = WebDriverWait(browser, 30).until(
+        expected_conditions.text_to_be_present_in_element((By.CSS_SELECTOR, '.card h5:nth-child(2)'), '100'))
+    clik_book.click()
+    # ----------------------------проскролить вниз------------------------------
+    scroll = browser.find_element(By.CSS_SELECTOR, '.form-group .form-control')
+    browser.execute_script("return arguments[0].scrollIntoView(true);", scroll)
+    # -------------------- решить математическую задачу-------------------------
+    value = browser.find_element(By.CSS_SELECTOR, '.form-group>label>span:nth-child(2)').text
+    caalc = calc(int(value))
+    field = browser.find_element(By.CSS_SELECTOR, '.form-group .form-control')
+    field.send_keys(str(caalc))
+    button = browser.find_element(By.CSS_SELECTOR, 'button#solve')
+    button.click()
+
+
+finally:
+    time.sleep(10)
+    browser.quit()
